@@ -7,3 +7,5 @@ class Note {
 
 
 }
+
+m = new melody({tabs: [], upperboand: 72, lowwerB: 60})
