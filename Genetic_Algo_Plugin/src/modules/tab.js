@@ -1,8 +1,12 @@
-class Tab {
+export class Tab {
     
-    constructor(notes){
-        this.notes = notes;
+    //midi note
+    constructor(){
+        this.notes = [];
     }
 
+    addNote(note){
+        this.notes.push(note)
+    }
 
 }
