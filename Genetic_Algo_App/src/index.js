@@ -2,7 +2,7 @@ import { initialize, Endpoint } from '@muzilator/sdk'
 
 const init = async () => {
   const platform = await initialize()
-  await platform.loadLibrary('bubbles-vanilla-example', 'bubbles', 'primary')
+  await platform.loadLibrary('music-genetic-algorithm-plugin', 'bubbles', 'primary')
   await platform.loadLibrary('midi-synth', 'synth1')
   await platform.loadLibrary('midi-synth', 'synth2')
 

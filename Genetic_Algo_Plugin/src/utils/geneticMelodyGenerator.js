@@ -17,7 +17,7 @@ export class GeneticMelodyGenerator{
 
     run(){
         for(let i = 0 ; i < this.NUMBER_OF_ITERATIONS ; i++){
-            this.culcMelodiesFitScore()
+            this.calcMelodiesFitScore()
             this.createNewGeneration()
         }
 
@@ -33,17 +33,35 @@ export class GeneticMelodyGenerator{
         return population
     }
 
-    // TODO:
-    createNewGeneration() {
+     createNewGeneration() {
+        this.population.sort((a,b) => {return b.fitnessScore - a.fitnessScore}) //sorting max to min score
+
+        let newGeneration = this.generatePopulation(this.population.length)
+        
+        //init 1/2 of the population to be a permutaion of the first half maximum melodies 
+        //NOTICE the other half of the new generation is random melodies
+        for(let i = 0 ; i < (this.populationSize / 2) ; i++){ 
+            let parentA =this.population[i]
+            let parentB =this.population[i+1]
+
+            let child = newGeneration[i]
+             
+
+            //intialize the first three tabs to be identical to parent A tabs, and the last same as parentB
+            child.tabs[0] = parentA.tabs[0]
+            child.tabs[1] = parentA.tabs[1]
+            child.tabs[2] = parentA.tabs[2]
+            child.tabs[3] = parentB.tabs[3]          
+        }
+
+        this.population = newGeneration //set the new genration to be the current population
 
     }
 
-    // TODO:
-    culcMelodiesFitScore() {
+    calcMelodiesFitScore() {
         this.population.forEach(melody => {
-            let fitVal = Fitness.culcMelodyFitVal(melody)
-            
-            // TODO: set the fitnessValue attribute of the melody to 'fitval'
+            let fitVal = Fitness.calcMelodyFitVal(melody)
+            melody.setFitnessScore(fitVal)// set the fitnessValue attribute of the melody to 'fitval'
 
         })
     }

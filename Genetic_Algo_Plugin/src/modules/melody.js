@@ -4,8 +4,8 @@ import {Note} from './note'
 export class Melody {
     
     constructor(scale){
+            
         this.tabs = []
-        this.fitnessScore = 0
 
         //create the tabs array:
         // 4 tabs in a melody
@@ -22,10 +22,33 @@ export class Melody {
 
             this.tabs.push(newTab)
         }
+
+        this.fitnessScore = 0 // defult value
     }
 
     getAllTabs(){
         return this.tabs
+    }
+
+    setFitnessScore(score){
+        this.fitnessScore = score;
+
+    }
+
+    printTabsArray(){
+        
+        for (let i = 0; i < 4; i++) {
+            let tab = (this.tabs)[i].notes
+            console.log("[")
+            // 4 notes in a tab
+            for (let j = 0; j < 4; j++) {
+
+                let note = tab[i]
+                console.log(", " + note.midi)
+            }
+
+            console.log("]")
+        }
     }
 
 }
