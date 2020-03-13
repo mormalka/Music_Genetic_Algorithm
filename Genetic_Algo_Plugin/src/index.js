@@ -62,12 +62,14 @@ window.addEventListener('load', () => {
     init()
   })
 window.onload = () => {
-    run_btn = document.getElementById('run_and_play')
-    run_btn.onclick = runAndPlay
+    run_btn = document.getElementById('run_btn')
+    play_btn = document.getElementById('play_btn')
+    run_btn.onclick = run
+    play_btn.onclick = 
 }
 
 
-function runAndPlay() {  
+function run() {  
     //initialize a new genetic generator with a population of 100 melodies.
     const genetic = new GeneticMelodyGenerator('C', 100)
     console.log(genetic)
@@ -76,7 +78,9 @@ function runAndPlay() {
     //* returns the choosen melody.
     const resultMelody = genetic.run()
     console.log(resultMelody)
+}
 
+function play (){
     // play the melody
     let notes = resultMelody.getAsNotesArray()
     let index = 0
