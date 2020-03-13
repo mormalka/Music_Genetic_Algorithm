@@ -4,7 +4,7 @@ import { GeneticMelodyGenerator } from './utils/geneticMelodyGenerator'
 console.log("Start the plugin...");
 
 // the scale here just for test perpuses. it will be located in the genetic class
-const scale = [60, 62, 64, 65, 67, 69, 71, 72]
+export const scale = [60, 62, 64, 65, 67, 69, 71, 72]
 var midiChannel
 var sequenceChannel
 var run_btn
