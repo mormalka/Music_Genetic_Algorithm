@@ -6,7 +6,7 @@ export class GeneticMelodyGenerator{
     constructor(scale, populationSize){
         this.populationSize = populationSize
 
-        // hard coding  major scale.
+        // hard coding c major scale.
         // will be changed to input scale in the future.
         this.scale = [60, 62, 64, 65, 67, 69, 71, 72]
 
@@ -20,9 +20,14 @@ export class GeneticMelodyGenerator{
             this.calcMelodiesFitScore()
             this.createNewGeneration()
         }
+        this.calcMelodiesFitScore()
 
-        // return the melody with the maximum fitnessScore (!!! recheck the imlementetion of this line !!!)
-        return Math.max(...this.population.map(melody => melody.fitnessScore))
+        // return the melody with the maximum fitnessScore
+        const maxMelody = this.population.reduce(function(prev, current) {
+            return (prev.fitnessScore > current.fitnessScore) ? prev : current
+        })
+
+        return maxMelody
     }
     
     generatePopulation(){

@@ -30,6 +30,13 @@ export class Melody {
         return this.tabs
     }
 
+    getAsNotesArray(){
+        let res = []
+        for(let i = 0 ; i < this.tabs.length ; i++){
+           res = res.concat(this.tabs[i].notes)
+        }
+        return res
+    }
     setFitnessScore(score){
         this.fitnessScore = score;
 
