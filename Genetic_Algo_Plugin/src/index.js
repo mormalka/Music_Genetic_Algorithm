@@ -5,9 +5,11 @@ console.log("Start the plugin...");
 
 // the scale here just for test perpuses. it will be located in the genetic class
 export const scale = [60, 62, 64, 65, 67, 69, 71, 72]
+var resultMelody
 var midiChannel
 var sequenceChannel
 var run_btn
+var play_btn
 
 const MidiEvents = [
     {
@@ -62,15 +64,17 @@ window.addEventListener('load', () => {
     init()
   })
 window.onload = () => {
+    debugger
     run_btn = document.getElementById('run_btn')
     play_btn = document.getElementById('play_btn')
     run_btn.onclick = run
-    play_btn.onclick = 
+    play_btn.onclick = play
 }
 
 
 function run() {  
     //initialize a new genetic generator with a population of 100 melodies.
+    debugger
     const genetic = new GeneticMelodyGenerator('C', 100)
     console.log(genetic)
 
@@ -80,7 +84,7 @@ function run() {
     console.log(resultMelody)
 }
 
-function play (){
+function play(){
     // play the melody
     let notes = resultMelody.getAsNotesArray()
     let index = 0
@@ -101,11 +105,4 @@ function play (){
     setTimeout(() => {sequenceChannel.postMessage({type: 'play-pattern', sequence: MidiEvents})}, 1000)
 }
 
-function playNotes(notes, index){
-    if (index >= notes.length) return
-
-    setTimeout( () => {
-
-    }, 1000)
-}
 
