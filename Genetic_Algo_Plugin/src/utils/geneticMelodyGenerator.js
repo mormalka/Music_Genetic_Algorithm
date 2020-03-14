@@ -1,5 +1,5 @@
 import { Melody } from '../modules/melody'
-import { Fitness } from './fitness'
+import { calcMelodyFitVal } from './fitness'
 
 export class GeneticMelodyGenerator{
 
@@ -65,7 +65,7 @@ export class GeneticMelodyGenerator{
 
     calcMelodiesFitScore() {
         this.population.forEach(melody => {
-            let fitVal = Fitness.calcMelodyFitVal(melody)
+            let fitVal = calcMelodyFitVal(melody)
             melody.setFitnessScore(fitVal)// set the fitnessValue attribute of the melody to 'fitval'
 
         })
