@@ -37,13 +37,31 @@ export class Melody {
         }
         return res
     }
+
+    getAsToneJsObjArray(){
+        let notes = this.getAsNotesArray();
+        let res = []
+        let currTime = 0
+
+        for(let i = 0; i < notes.length ; i++){
+            res.push(
+                { 
+                  time : currTime,
+                  note : notes[i].midi,
+                  dur : notes[i].duration,
+                })
+            currTime = currTime + notes[i].duration
+        }
+
+        return res
+    }
+
     setFitnessScore(score){
         this.fitnessScore = score;
 
     }
 
-    printTabsArray(){
-        
+    printTabsArray(){  
         for (let i = 0; i < 4; i++) {
             let tab = (this.tabs)[i].notes
             console.log("[")

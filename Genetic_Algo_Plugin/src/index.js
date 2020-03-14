@@ -1,10 +1,11 @@
 import { initialize } from '@muzilator/sdk';
 import { GeneticMelodyGenerator } from './utils/geneticMelodyGenerator'
+import * as Tone from "tone";
 
 console.log("Start the plugin...");
 
 // the scale here just for test perpuses. it will be located in the genetic class
-export const scale = [60, 62, 64, 65, 67, 69, 71, 72]
+export const scale = [60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 75, 77, 79, 81, 82, 84]
 var resultMelody
 var midiChannel
 var sequenceChannel
@@ -64,7 +65,6 @@ window.addEventListener('load', () => {
     init()
   })
 window.onload = () => {
-    debugger
     run_btn = document.getElementById('run_btn')
     play_btn = document.getElementById('play_btn')
     run_btn.onclick = run
@@ -74,35 +74,37 @@ window.onload = () => {
 
 function run() {  
     //initialize a new genetic generator with a population of 100 melodies.
-    debugger
     const genetic = new GeneticMelodyGenerator('C', 100)
     console.log(genetic)
 
     // run the algorithm.
     //* returns the choosen melody.
-    const resultMelody = genetic.run()
+    resultMelody = genetic.run()
     console.log(resultMelody)
 }
 
 function play(){
-    // play the melody
-    let notes = resultMelody.getAsNotesArray()
-    let index = 0
-    // setInterval(() => {
-    //     if (index >= notes.length) return
-    // }, 1000)
 
-   // playNotes(notes, 0)
-    // for(let i = 0 ; i < notes.length ; i++ ){
-    //     midiChannel.postMessage({type: 'note-on', pitch: notes[i].midi, velocity: 100});
-    //     await setTimeout(function(){
-    //         console.log('sec')
-    //     } ,1000)
-    //     midiChannel.postMessage({type: 'note-off', pitch: notes[i].midi, velocity: 100});
-    // }
+if(resultMelody == undefined) {
+  alert('Please Generate a melody first')
+  return
+}
 
-    sequenceChannel.postMessage({type: 'play-pattern', sequence: MidiEvents})
-    setTimeout(() => {sequenceChannel.postMessage({type: 'play-pattern', sequence: MidiEvents})}, 1000)
+var synth = new Tone.Synth().toMaster()
+
+//pass in an array of events
+var part = new Tone.Part(function(time, event){
+	//the events will be given to the callback with the time they occur
+	synth.triggerAttackRelease(event.note, event.dur, time)
+},
+ resultMelody.getAsToneJsObjArray())
+
+//start the part at the beginning of the Transport's timeline
+part.start(0)
+
+// play
+Tone.Transport.toggle()
+  
 }
 
 
