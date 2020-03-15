@@ -3,21 +3,21 @@ import {Note} from './note'
 
 export class Melody {
     
-    constructor(scale){
+    constructor(scale, durations){
             
         this.tabs = []
 
         //create the tabs array:
         // 4 tabs in a melody
-        for (let i = 0; i < 4; i++) {
+        for (let i = 0; i < 6; i++) {
             let newTab = new Tab();
 
             // 4 notes in a tab
             for (let j = 0; j < 4; j++) {
-
-                // get a randon mini note
+                // generate a random Note
                 let randNote = scale[Math.floor(Math.random() * scale.length)]
-                newTab.addNote(new Note(randNote))
+                let randDuration = durations[Math.floor(Math.random() * durations.length)]
+                newTab.addNote(new Note(randNote, randDuration))
             }
 
             this.tabs.push(newTab)

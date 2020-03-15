@@ -1,5 +1,5 @@
 export class Note {
-    constructor(midi, duration = 1){
+    constructor(midi, duration){
         this.midi = midi;
         this.duration = duration; 
         this.literal = this.dic[midi % 12] + (Math.floor(midi/12)-1)

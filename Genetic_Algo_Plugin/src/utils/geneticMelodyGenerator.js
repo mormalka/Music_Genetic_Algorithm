@@ -10,6 +10,9 @@ export class GeneticMelodyGenerator{
         // will be changed to input scale in the future.
         this.scale = [60, 62, 64, 65, 67, 69, 71, 72]
 
+        //hard coding durations
+        this.durations = [1, 0.5, 0.5, 0.25, 0.25, 0.25]
+
         this.population = this.generatePopulation(populationSize)
 
         this.NUMBER_OF_ITERATIONS = 100
@@ -33,7 +36,7 @@ export class GeneticMelodyGenerator{
     generatePopulation(){
         let population = []
         for(let i = 0 ; i < this.populationSize ; i++){
-            population.push(new Melody(this.scale))
+            population.push(new Melody(this.scale, this.durations))
         }
         return population
     }
@@ -54,7 +57,7 @@ export class GeneticMelodyGenerator{
 
             //intialize the first three tabs to be identical to parent A tabs, and the last same as parentB
             child.tabs[0] = parentA.tabs[0]
-            child.tabs[1] = parentA.tabs[1]
+            child.tabs[1] = parentB.tabs[1]
             child.tabs[2] = parentA.tabs[2]
             child.tabs[3] = parentB.tabs[3]          
         }

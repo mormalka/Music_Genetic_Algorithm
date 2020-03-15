@@ -22,6 +22,7 @@ function absoluteDistance(melody){
 //Max value is 1, Min value is 0
 function dominantNotesFreq(melody){
 
+    let optimalFreq = 0.25
     let allNotes = melody.getAsNotesArray()
     let len = allNotes.length;
     let counter = 0
@@ -39,8 +40,11 @@ function dominantNotesFreq(melody){
             }
         }
     }
-    return (counter / len)
 
+    let freq = (counter / len)
+    // we give high score for freq closer to optimalFreq
+    if (freq < optimalFreq) return freq
+    else return (1 - optimalFreq - freq)
 }
 
 function notesDiversity(melody){
