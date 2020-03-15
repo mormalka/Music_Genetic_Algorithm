@@ -47,7 +47,7 @@ export class Melody {
             res.push(
                 { 
                   time : currTime,
-                  note : notes[i].midi,
+                  note : notes[i].literal,
                   dur : notes[i].duration,
                 })
             currTime = currTime + notes[i].duration
@@ -55,6 +55,8 @@ export class Melody {
 
         return res
     }
+
+
 
     setFitnessScore(score){
         this.fitnessScore = score;

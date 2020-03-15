@@ -58,7 +58,7 @@ export function calcMelodyFitVal(melody){
     //console.log("param 1:" + absoluteDistance(melody))
     //console.log("param 2:" + dominantNotesFreq(melody))
     //console.log("param 3:" + notesDiversity(melody))
-    let fitVal = (0.5 * absoluteDistance(melody)) + (0.25 * dominantNotesFreq(melody)) + (0.25 * notesDiversity(melody))
+    let fitVal = (0.25 * absoluteDistance(melody)) + (0.25 * dominantNotesFreq(melody)) + (0.5 * notesDiversity(melody))
     
     return fitVal
 }

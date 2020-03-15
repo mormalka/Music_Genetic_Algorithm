@@ -5,7 +5,7 @@ import * as Tone from "tone";
 console.log("Start the plugin...");
 
 // the scale here just for test perpuses. it will be located in the genetic class
-export const scale = [60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 75, 77, 79, 81, 82, 84]
+export const scale = [60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 77, 79, 81, 83, 84]
 var resultMelody
 var midiChannel
 var sequenceChannel
