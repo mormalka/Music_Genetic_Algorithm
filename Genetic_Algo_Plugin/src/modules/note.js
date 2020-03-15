@@ -4,6 +4,11 @@ export class Note {
         this.duration = duration; 
         this.literal = this.dic[midi % 12] + (Math.floor(midi/12)-1)
     }
+
+    setMidi (midi){
+        this.midi = midi
+        this.literal = this.dic[midi % 12] + (Math.floor(midi/12)-1)
+    }
 }
 
 Note.prototype.dic = {

@@ -6,6 +6,7 @@ console.log("Start the plugin...");
 
 // the scale here just for test perpuses. it will be located in the genetic class
 export const scale = [60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 77, 79, 81, 83, 84]
+const POPULATION_SIZE = 1000
 var resultMelody
 var run_btn
 var play_btn
@@ -19,7 +20,7 @@ window.onload = () => {
 
 function run() {  
     //initialize a new genetic generator with a population of 100 melodies.
-    const genetic = new GeneticMelodyGenerator('C', 100)
+    const genetic = new GeneticMelodyGenerator('C', POPULATION_SIZE)
     console.log(genetic)
 
     // run the algorithm.

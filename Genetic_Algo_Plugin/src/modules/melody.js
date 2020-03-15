@@ -9,7 +9,7 @@ export class Melody {
 
         //create the tabs array:
         // 4 tabs in a melody
-        for (let i = 0; i < 6; i++) {
+        for (let i = 0; i < 4; i++) {
             let newTab = new Tab();
 
             // 4 notes in a tab

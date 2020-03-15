@@ -10,8 +10,12 @@ function absoluteDistance(melody){
     let maxDistances = (scale[scaleSize-1]- scale[0]) * (scaleSize-1)
     let sumDistances = 0 ; 
     for(let i = 0 ; i < allNotes.length -1 ; i++){
-            sumDistances = Math.abs(allNotes[i].midi - allNotes[i+1].midi)
-
+            // we dont want the same note to repeat.
+            if (allNotes[i].midi === allNotes[i+1].midi){
+                sumDistances = sumDistances + 5; // we can panich with any big number. I chose 5. 
+            }
+            
+            sumDistances = sumDistances + Math.abs(allNotes[i].midi - allNotes[i+1].midi)
     }
     //min distance get high score
     return ((maxDistances - sumDistances) / maxDistances)
@@ -22,14 +26,14 @@ function absoluteDistance(melody){
 //Max value is 1, Min value is 0
 function dominantNotesFreq(melody){
 
-    let optimalFreq = 0.25
+    let optimalFreq = 2/7
     let allNotes = melody.getAsNotesArray()
     let len = allNotes.length;
     let counter = 0
 
     let dominantNotesFreq = [] //stores the dominant nodes of the choosen scale
     for(let pos = 0 ; pos < scale.length ; pos++){
-        if( (pos % 7) === 0 || (pos % 7) === 4 ){
+        if( (pos % 7) === 0){
             dominantNotesFreq = dominantNotesFreq.concat(scale[pos])
         }
     }
@@ -56,6 +60,7 @@ function notesDiversity(melody){
     }
     return (notesInMelody.size / allNotes.length)
 }
+
 
 export function calcMelodyFitVal(melody){
         
