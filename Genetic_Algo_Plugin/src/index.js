@@ -13,6 +13,9 @@ var gen_btn
 var run_btn
 var play_btn
 
+// TODO: mor, this is the array you need to work with.
+var fitnessWeights = []
+
 let genetic
 
 window.onload = () => {
