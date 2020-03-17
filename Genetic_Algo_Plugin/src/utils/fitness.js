@@ -12,7 +12,7 @@ function absoluteDistance(melody){
     for(let i = 0 ; i < allNotes.length -1 ; i++){
             // we dont want the same note to repeat.
             if (allNotes[i].midi === allNotes[i+1].midi){
-                sumDistances = sumDistances + 5; // we can panich with any big number. I chose 5. 
+                sumDistances = sumDistances + 5; // we can panish with any big number. I chose 5. 
             }
             
             sumDistances = sumDistances + Math.abs(allNotes[i].midi - allNotes[i+1].midi)

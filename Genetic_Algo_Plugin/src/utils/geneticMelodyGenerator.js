@@ -15,7 +15,7 @@ export class GeneticMelodyGenerator{
 
         this.population = this.generatePopulation(populationSize)
 
-        this.NUMBER_OF_ITERATIONS = 1000
+        this.NUMBER_OF_ITERATIONS = 100
     }
 
     run(){
@@ -106,7 +106,6 @@ export class GeneticMelodyGenerator{
         this.population.forEach(melody => {
             let fitVal = calcMelodyFitVal(melody)
             melody.setFitnessScore(fitVal)// set the fitnessValue attribute of the melody to 'fitval'
-
         })
     }
 }

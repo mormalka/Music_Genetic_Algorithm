@@ -6,23 +6,51 @@ console.log("Start the plugin...");
 
 // the scale here just for test perpuses. it will be located in the genetic class
 export const scale = [60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 77, 79, 81, 83, 84]
-const POPULATION_SIZE = 1000
+var inputScale 
+const POPULATION_SIZE = 100
 var resultMelody
+var gen_btn
 var run_btn
 var play_btn
 
+let genetic
+
 window.onload = () => {
+    gen_btn = document.getElementById('gen_btn')
     run_btn = document.getElementById('run_btn')
     play_btn = document.getElementById('play_btn')
+    gen_btn.onclick = gen
     run_btn.onclick = run
     play_btn.onclick = play
 }
 
-function run() {  
-    //initialize a new genetic generator with a population of 100 melodies.
-    const genetic = new GeneticMelodyGenerator('C', POPULATION_SIZE)
-    console.log(genetic)
+//dropdown 
+const selected = document.querySelector(".selected");
+const optionsContainer = document.querySelector(".options-container");
 
+const optionsList = document.querySelectorAll(".option");
+
+selected.addEventListener("click", () => {
+  optionsContainer.classList.toggle("active");
+});
+
+optionsList.forEach(o => {
+  o.addEventListener("click", () => {
+    selected.innerHTML = o.querySelector("label").innerHTML;
+    inputScale = o.querySelector("label").innerHTML;
+    console.log(inputScale)
+    optionsContainer.classList.remove("active");
+  });
+});
+
+function gen() {
+
+  //initialize a new genetic generator with a population of 100 melodies.
+  genetic = new GeneticMelodyGenerator('C', POPULATION_SIZE)
+  console.log(genetic)
+}
+
+function run() {  
     // run the algorithm.
     //* returns the choosen melody.
     resultMelody = genetic.run()

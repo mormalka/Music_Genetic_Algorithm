@@ -60,7 +60,6 @@ export class Melody {
 
     setFitnessScore(score){
         this.fitnessScore = score;
-
     }
 
     printTabsArray(){  
