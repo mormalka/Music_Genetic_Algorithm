@@ -1,4 +1,4 @@
-import { scale } from '../index'
+import { scale,fitnessWeights } from '../index'
 
 
 //Calculates score according to sum of distances between every two notes
@@ -67,6 +67,11 @@ export function calcMelodyFitVal(melody){
     //console.log("param 1:" + absoluteDistance(melody))
     //console.log("param 2:" + dominantNotesFreq(melody))
     //console.log("param 3:" + notesDiversity(melody))
+
+    
+    //uncomment when array will be filled with user input
+    //let fitVal = (fitnessWeights[0] * absoluteDistance(melody)) + (fitnessWeights[1] * dominantNotesFreq(melody)) + (fitnessWeights[2] * notesDiversity(melody))
+
     let fitVal = (0.25 * absoluteDistance(melody)) + (0.25 * dominantNotesFreq(melody)) + (0.5 * notesDiversity(melody))
     
     return fitVal
