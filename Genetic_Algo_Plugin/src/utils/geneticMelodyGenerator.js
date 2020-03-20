@@ -3,18 +3,13 @@ import { calcMelodyFitVal } from './fitness'
 
 export class GeneticMelodyGenerator{
 
-    constructor(scalePitch, scaleType, populationSize){
+    constructor(scalePitch, scaleType, populationSize, fitnessWeights){
         this.populationSize = populationSize
-
-        // hard coding c major scale.
-        // will be changed to input scale in the future.
+        this.fitnessWeights = fitnessWeights
         this.scale = this.generateScale(scalePitch, scaleType)
-
         //hard coding durations
         this.durations = [1, 0.5, 0.5, 0.25, 0.25, 0.25]
-
         this.population = this.generatePopulation(populationSize)
-
         this.NUMBER_OF_ITERATIONS = 100
     }
 
@@ -125,7 +120,7 @@ export class GeneticMelodyGenerator{
 
     calcMelodiesFitScore() {
         this.population.forEach(melody => {
-            let fitVal = calcMelodyFitVal(melody)
+            let fitVal = calcMelodyFitVal(melody, this.scale, this.fitnessWeights)
             melody.setFitnessScore(fitVal)// set the fitnessValue attribute of the melody to 'fitval'
         })
     }

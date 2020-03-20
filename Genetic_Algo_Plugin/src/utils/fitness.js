@@ -1,9 +1,9 @@
-import { scale, fitnessWeights } from '../index'
+import { fitnessWeights } from '../index'
 
 
 //Calculates score according to sum of distances between every two notes
 //Max value is 1, Min value is 0
-function absoluteDistance(melody){
+function absoluteDistance(melody, scale){
 
     let allNotes = melody.getAsNotesArray()
     let scaleSize = scale.length
@@ -24,7 +24,7 @@ function absoluteDistance(melody){
 
 //Calculates score according to number of shows of the dominant notes of the scale
 //Max value is 1, Min value is 0
-function dominantNotesFreq(melody){
+function dominantNotesFreq(melody, scale){
 
     let optimalFreq = 2/7
     let allNotes = melody.getAsNotesArray()
@@ -51,7 +51,7 @@ function dominantNotesFreq(melody){
     else return (1 - optimalFreq - freq)
 }
 
-function notesDiversity(melody){
+function notesDiversity(melody, scale){
 
     let notesInMelody = new Set()
     let allNotes = melody.getAsNotesArray()
@@ -61,13 +61,9 @@ function notesDiversity(melody){
     return (notesInMelody.size / allNotes.length)
 }
 
-
-export function calcMelodyFitVal(melody){
-    
-    //uncomment when array will be filled with user input
-    let fitVal = (fitnessWeights[0] * absoluteDistance(melody)) + (fitnessWeights[1] * dominantNotesFreq(melody)) + (fitnessWeights[2] * notesDiversity(melody))
-
-    //let fitVal = (0.25 * absoluteDistance(melody)) + (0.25 * dominantNotesFreq(melody)) + (0.5 * notesDiversity(melody))
-    
-    return fitVal
+// returns a value in range of 0-1
+export function calcMelodyFitVal(melody, scale, fitnessWeights){
+    let fitVal = (fitnessWeights[0] * absoluteDistance(melody, scale)) + (fitnessWeights[1] * dominantNotesFreq(melody, scale)) + (fitnessWeights[2] * notesDiversity(melody, scale))
+    let maxVal = fitnessWeights.reduce((a, b) => a + b, 0)
+    return fitVal/maxVal
 }

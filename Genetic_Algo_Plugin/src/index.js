@@ -4,11 +4,8 @@ import * as Tone from "tone";
 
 console.log("Start the plugin...");
 
-// the scale here just for test perpuses. it will be located in the genetic class
-export const scale = [60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 77, 79, 81, 83, 84]
-
-// TODO: mor, this is the array you need to work with.
-export var fitnessWeights = [0.25, 0.25, 0.5]
+// will be filled by the range sliders
+export var fitnessWeights = []
 
 // init global variables
 var inputScale 
@@ -21,12 +18,23 @@ var play_btn
 let genetic
 
 window.onload = () => {
+    // set the buttons
     gen_btn = document.getElementById('gen_btn')
-    run_btn = document.getElementById('run_btn')
-    play_btn = document.getElementById('play_btn')
     gen_btn.onclick = gen
+
+    run_btn = document.getElementById('run_btn')
     run_btn.onclick = run
+
+    play_btn = document.getElementById('play_btn')
     play_btn.onclick = play
+    
+    // set the range sliders
+    let rangeSliders = document.getElementById('rage_sliders_form')
+    for(let i = 0 ; i < rangeSliders.length ; i++) {
+      let element = rangeSliders[i]
+      if (element.localName !== "input") return
+      fitnessWeights.push(element.valueAsNumber)
+    }
 }
 
 //dropdown 
@@ -72,8 +80,12 @@ optionsList2.forEach(o => {
 
 //initialize a new genetic generator with a population of 100 melodies.
 function gen() {  
+  if(inputScale == undefined || scaleType == undefined) {
+    alert('Please choose your melody settings first')
+    return
+  }
   console.log(inputScale + scaleType)
-  genetic = new GeneticMelodyGenerator(inputScale, scaleType, POPULATION_SIZE)
+  genetic = new GeneticMelodyGenerator(inputScale, scaleType, POPULATION_SIZE, fitnessWeights)
   console.log(genetic)
 }
 

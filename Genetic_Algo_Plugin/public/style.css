@@ -29,6 +29,7 @@ body{
     font-size: 50px;
     margin-top: 5%;
 }
+/* fix the bug where to animated area deos not cover all the screen when width is large and hight is small */
 .animation-area{
     background: linear-gradient(to top, #042768, #056953);
     width: 100%;
@@ -108,9 +109,10 @@ body{
     padding: 5px;
     margin-left: 100px;
   }
-  .container h2{
+  .container p{
       text-align: left;
       margin-bottom: 5px;
+      margin-left: 20px;
       font-size: 30px;
   }
   
@@ -203,7 +205,7 @@ body{
 /* buttons style  */
 .container1{
     text-align: center;
-    margin-top: 100px;
+    margin-top: 20px;
   }
   .btn{
     border: 1px solid #3498db;
@@ -260,6 +262,76 @@ body{
 
   /* Range Sliders */
   
+  
+  form{
+    width:260px;
+    height:260px;
+    margin-left : 90px;
+  }
+  
+  input[type="range"]{
+    -webkit-appearance:none;
+    width:160px;
+    height:20px;
+    margin:10px 50px;
+    margin-bottom: 30px;
+    background: linear-gradient(to right, rgb(214, 236, 10) 0%, rgb(228, 15, 4) 100%);
+    background-size:150px 10px;
+    background-position:center;
+    background-repeat:no-repeat;
+    overflow:hidden;
+    outline: none;
+  }
+  
+  input[type="range"]:first-of-type{
+    margin-top:10px;
+  }
+  
+  input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:20px;
+    height:20px;
+    background:rgb(2, 151, 107);
+    position:relative;
+    z-index:3;
+    box-shadow:0 0 5px 0 rgba(0,0,0,0.3);
+  }
+  
+  input[type="range"]::-webkit-slider-thumb:after{
+    content:" ";
+    width:160px;
+    height:10px;
+    position:absolute;
+    z-index:1;
+    right:20px;
+    top:5px;
+    background: #ff5b32;
+    background: linear-gradient(to right, #f088fc 1%, #AC6CFF 70%);
+  }
+
+  .slider-box {
+    /* align-items:;
+    margin: auto;
+  padding: 10px; */
+  text-align:center;
+  }
+  
+  p{
+    margin-bottom: 10px;
+    width:100%;
+    text-align:center;
+    color:white;
+    font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', Roboto, Arial, Sans-serif;
+    font-size:32px;
+    margin-top:20px;
+  }
+
+  h3 {
+    font-size: 18px;
+        font-family:sans-serif;
+
+    color: white;
+  }
   
 
  
