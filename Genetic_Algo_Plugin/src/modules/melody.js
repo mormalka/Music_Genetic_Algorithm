@@ -15,7 +15,7 @@ export class Melody {
             // 4 notes in a tab
             for (let j = 0; j < 4; j++) {
                 // generate a random Note
-                let randNote = scale[Math.floor(Math.random() * scale.length)]
+                let randNote = scale[Math.floor(Math.random() * Math.random() * Math.random() * scale.length)]
                 let randDuration = durations[Math.floor(Math.random() * durations.length)]
                 newTab.addNote(new Note(randNote, randDuration))
             }
