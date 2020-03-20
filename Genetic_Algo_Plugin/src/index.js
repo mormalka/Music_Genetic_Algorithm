@@ -73,7 +73,7 @@ optionsList2.forEach(o => {
 //initialize a new genetic generator with a population of 100 melodies.
 function gen() {  
   console.log(inputScale + scaleType)
-  genetic = new GeneticMelodyGenerator('C', POPULATION_SIZE)
+  genetic = new GeneticMelodyGenerator(inputScale, scaleType, POPULATION_SIZE)
   console.log(genetic)
 }
 

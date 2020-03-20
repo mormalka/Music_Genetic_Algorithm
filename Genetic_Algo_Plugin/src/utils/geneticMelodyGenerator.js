@@ -3,12 +3,12 @@ import { calcMelodyFitVal } from './fitness'
 
 export class GeneticMelodyGenerator{
 
-    constructor(scale, populationSize){
+    constructor(scalePitch, scaleType, populationSize){
         this.populationSize = populationSize
 
         // hard coding c major scale.
         // will be changed to input scale in the future.
-        this.scale = [60, 62, 64, 65, 67, 69, 71, 72]
+        this.scale = this.generateScale(scalePitch, scaleType)
 
         //hard coding durations
         this.durations = [1, 0.5, 0.5, 0.25, 0.25, 0.25]
@@ -45,6 +45,27 @@ export class GeneticMelodyGenerator{
             population.push(new Melody(this.scale, this.durations))
         }
         return population
+    }
+
+    generateScale (scalePitch, scaleType) {
+        let scale = []
+
+        let rootMidi = 60 + this.literalToMidiDic[scalePitch]
+        scale.push(rootMidi)
+
+        let startIndex;
+        if( scaleType === 'Major') startIndex = 0
+        else if (scaleType === 'Minor') startIndex = 5
+        else return []
+
+        let prevMidiNote = rootMidi
+        for(let i = 0 ; i < 14 ; i++) {
+            let curMidiNote =  prevMidiNote + this.scaleGaps[ (startIndex + i) % this.scaleGaps.length ]  
+            scale.push(curMidiNote)
+            prevMidiNote = curMidiNote
+        }
+
+        return scale
     }
 
      createNewGeneration() {
@@ -109,3 +130,21 @@ export class GeneticMelodyGenerator{
         })
     }
 }
+
+GeneticMelodyGenerator.prototype.literalToMidiDic = {
+    'C' : 0,
+    'C#' : 1,
+    'D' : 2,
+    'E' : 3,
+    'F' : 4,
+    'F#' : 5,
+    'G' : 6,
+    'G#' : 7,
+    'A' : 8,
+    'A#' : 9,
+    'B' : 10,
+    'B#' : 11,
+}
+
+GeneticMelodyGenerator.prototype.scaleGaps = [2, 2, 1, 2, 2, 2, 1]
+
