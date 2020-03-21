@@ -8,10 +8,10 @@ The product is used to inspire or help composers for creates new musical melodie
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Installing
+### Installing dependencies
 
 ```
-npm install tone
+yarn install
 ```
 
 In the project directory, you can run:
@@ -30,7 +30,3 @@ You will also see any lint errors in the console.
 * **Nadav Dor** 
 * **Mor Malka** 
 
-
-## License
-
-This project is licensed under IDC Computer Music Course 

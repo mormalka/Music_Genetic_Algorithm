@@ -11,13 +11,13 @@ export var fitnessWeights = []
 // init global variables
 var inputScale 
 var scaleType
-const POPULATION_SIZE = 100
+const POPULATION_SIZE = 1000
 var resultMelody
 var gen_btn
 var run_btn
 var play_btn
-var clear_btn
 let genetic
+var messageBox
 
 window.onload = () => {
     // set the buttons
@@ -30,8 +30,7 @@ window.onload = () => {
     play_btn = document.getElementById('play_btn')
     play_btn.onclick = play
 
-    clear_btn = document.getElementById('clear_btn')
-    clear_btn.onclick = clear
+    messageBox = document.getElementById('message-box')
     
     // set the range sliders
     let rangeSliders = document.getElementById('rage_sliders_form')
@@ -80,20 +79,21 @@ optionsList2.forEach(o => {
 });
 
 // graph logic
-function updateGraph(labels, data){
-  var ctx = document.getElementById('myChart').getContext('2d');
+
+// init an empty graph
+var ctx = document.getElementById('myChart').getContext('2d');
   var chart = new Chart(ctx, {
   // The type of chart we want to create
   type: 'line',
 
   // The data for our dataset
   data: {
-    labels: labels,
+    labels: [],
       datasets: [{
-          label: 'Max fitness value of thisiteration is',
+          label: 'Max fitness value per thisiteration',
           
           borderColor: 'rgb(255, 99, 132)',
-          data: data
+          data: []
       }]
   },
 
@@ -112,11 +112,19 @@ function updateGraph(labels, data){
         display: false,
     }]
   },
-  
+  responsive: true,
+  maintainAspectRatio: false,  
   }
   });
-}
-updateGraph([], [])
+
+function updateGraph(labels, data){
+
+  chart.data.labels = labels
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data = data;
+    });
+    chart.update();
+  }
 
 //initialize a new genetic generator with a population of 100 melodies.
 function gen() {  
@@ -127,6 +135,9 @@ function gen() {
   console.log(inputScale + scaleType)
   genetic = new GeneticMelodyGenerator(inputScale, scaleType, POPULATION_SIZE, fitnessWeights)
   console.log(genetic)
+
+  //give informative message
+  messageBox.innerHTML = 'Run the algorithm and wait'
 }
 
 // run the genetic algorithm.
@@ -137,12 +148,18 @@ function run() {
     return
   }
 
-    resultMelody = genetic.run()
-    console.log(resultMelody)
+  //give informative message
+  messageBox.innerHTML = 'Running...'
 
-    //update the graph
-    let graphData = genetic.getGraphData()
-    updateGraph(graphData.labels, graphData.data)
+  resultMelody = genetic.run()
+  console.log(resultMelody)
+
+  //update the graph
+  let graphData = genetic.getGraphData()
+  updateGraph(graphData.labels, graphData.data)
+
+  //give informative message
+  messageBox.innerHTML = 'Done. You can play your new melody or generate another one and play them together'
 }
 
 //play the result melody
@@ -170,13 +187,10 @@ function play() {
   // play
   Tone.Transport.toggle()
   
-
-  // part.removeAll()
+  //give informative message
+  messageBox.innerHTML = 'Playing... Refresh the page in order to clear the melodies'
 
 }
 
-function clear (){
-  Tone.Transport.clear()
-}
 
 

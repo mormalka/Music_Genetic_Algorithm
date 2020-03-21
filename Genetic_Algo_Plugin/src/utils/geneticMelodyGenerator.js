@@ -107,6 +107,8 @@ export class GeneticMelodyGenerator{
             //newGeneration.push(child)
         }
 
+        /*here we have another way of mixing the populations.
+         we left it here for future development of the algorithm*/
        
         // for(let i = 0 ; i < (halfSize) ; i++){ 
         //     let parentA =this.population[i]
