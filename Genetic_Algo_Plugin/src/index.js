@@ -10,7 +10,7 @@ export var fitnessWeights = []
 // init global variables
 var inputScale 
 var scaleType
-const POPULATION_SIZE = 1000
+const POPULATION_SIZE = 100
 var resultMelody
 var gen_btn
 var run_btn
@@ -183,12 +183,11 @@ function play() {
   //start the part at the beginning of the Transport's timeline
   part.start(0)
 
+  //give informative message
+  messageBox.innerHTML = 'Playing... Refresh the page in order to clear the resulting melodies'
+
   // play
   Tone.Transport.toggle()
-  
-  //give informative message
-  messageBox.innerHTML = 'Playing... Refresh the page in order to clear prorperties'
-
 }
 
 
