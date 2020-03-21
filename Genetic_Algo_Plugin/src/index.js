@@ -1,4 +1,3 @@
-import { initialize } from '@muzilator/sdk';
 import { GeneticMelodyGenerator } from './utils/geneticMelodyGenerator'
 import * as Tone from "tone";
 import * as Chart from "chart.js";
