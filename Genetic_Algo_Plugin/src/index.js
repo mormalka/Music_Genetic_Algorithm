@@ -159,7 +159,7 @@ function run() {
   updateGraph(graphData.labels, graphData.data)
 
   //give informative message
-  messageBox.innerHTML = 'Done. You can play your new melody or generate another one and play them together'
+  messageBox.innerHTML = 'Mazal-Tov! Your new melody just born, you can play it now (or generate another one and play simultanly) '
 }
 
 //play the result melody
@@ -188,7 +188,7 @@ function play() {
   Tone.Transport.toggle()
   
   //give informative message
-  messageBox.innerHTML = 'Playing... Refresh the page in order to clear the melodies'
+  messageBox.innerHTML = 'Playing... Refresh the page in order to clear prorperties'
 
 }
 
