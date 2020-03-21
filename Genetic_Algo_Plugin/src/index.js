@@ -90,7 +90,7 @@ function updateGraph(labels, data){
   data: {
     labels: labels,
       datasets: [{
-          label: 'Avrage Fitness Value Over The Iterations',
+          label: 'Max fitness value of thisiteration is',
           
           borderColor: 'rgb(255, 99, 132)',
           data: data

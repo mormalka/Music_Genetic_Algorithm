@@ -85,7 +85,7 @@ export class GeneticMelodyGenerator{
      createNewGeneration() {
         this.population.sort((a,b) => {return b.fitnessScore - a.fitnessScore}) //sorting max to min score
         let halfSize = this.population.length / 2
-        let newGeneration = []
+        let newGeneration = this.generatePopulation()
         
         //init 1/2 of the population to be a permutaion of the first half maximum melodies 
         //NOTICE the other half of the new generation is random melodies
@@ -102,36 +102,33 @@ export class GeneticMelodyGenerator{
                 else child.tabs[j] = parentB.tabs[j]
             }
             
-            newGeneration.push(child)
+            newGeneration[i] = child
+
+            //newGeneration.push(child)
         }
 
        
-        for(let i = 0 ; i < (halfSize) ; i++){ 
-            let parentA =this.population[i]
-            let parentB =this.population[i + 1]
+        // for(let i = 0 ; i < (halfSize) ; i++){ 
+        //     let parentA =this.population[i]
+        //     let parentB =this.population[i + 1]
 
-            let child = new Melody(this.scale, this.durations)
+        //     let child = new Melody(this.scale, this.durations)
 
-            //debbug
-            if(i == 48){
-                i = i
-            }
+        //     try {
+        //      // we will take tabs in even indexes from parent B
+        //     // and tabs in odd indexes from parent A
+        //         for(let j = 0 ; j < child.tabs.length ; j++){
+        //             if (j%2 === 0) child.tabs[j] = parentB.tabs[j]
+        //             else child.tabs[j] = parentA.tabs[j]
+        //         }
 
-            try {
-             // we will take tabs in even indexes from parent B
-            // and tabs in odd indexes from parent A
-                for(let j = 0 ; j < child.tabs.length ; j++){
-                    if (j%2 === 0) child.tabs[j] = parentB.tabs[j]
-                    else child.tabs[j] = parentA.tabs[j]
-                }
-
-            } catch (error) {
-                console.log(error)
-            }
+        //     } catch (error) {
+        //         console.log(error)
+        //     }
             
             
-            newGeneration.push(child)
-        }
+        //     newGeneration.push(child)
+        // }
 
         this.population = newGeneration //set the new genration to be the current population
 
