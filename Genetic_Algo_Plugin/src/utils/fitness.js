@@ -65,5 +65,6 @@ function notesDiversity(melody, scale){
 export function calcMelodyFitVal(melody, scale, fitnessWeights){
     let fitVal = (fitnessWeights[0] * absoluteDistance(melody, scale)) + (fitnessWeights[1] * dominantNotesFreq(melody, scale)) + (fitnessWeights[2] * notesDiversity(melody, scale))
     let maxVal = fitnessWeights.reduce((a, b) => a + b, 0)
+    if(maxVal === 0) return 0
     return fitVal/maxVal
 }

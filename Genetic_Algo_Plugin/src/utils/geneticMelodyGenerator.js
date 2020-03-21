@@ -11,19 +11,24 @@ export class GeneticMelodyGenerator{
         this.durations = [1, 0.5, 0.5, 0.25, 0.25, 0.25]
         this.population = this.generatePopulation(populationSize)
         this.NUMBER_OF_ITERATIONS = 100
+        this.maxMelodiesArray = []
+        this.iterationsArray = []
     }
 
     run(){
         for(let i = 0 ; i < this.NUMBER_OF_ITERATIONS ; i++){
             this.calcMelodiesFitScore()
+
+            //store the max melody in every iteration from later plotting in the graph
+            this.maxMelodiesArray.push(this.getMaxMelody().fitnessScore)
+            this.iterationsArray.push(i.toString())
+
             this.createNewGeneration()
         }
         this.calcMelodiesFitScore()
 
-        // return the melody with the maximum fitnessScore
-        const maxMelody = this.population.reduce(function(prev, current) {
-            return (prev.fitnessScore > current.fitnessScore) ? prev : current
-        })
+        // get the melody with the maximum fitnessScore
+        const maxMelody = this.getMaxMelody()
 
         // twik the melody to start and end with the root note 
         let tabsLen = maxMelody.tabs.length
@@ -32,6 +37,20 @@ export class GeneticMelodyGenerator{
         maxMelody.tabs[ tabsLen-1 ].notes[ numOfNotesInLastTab-1 ].setMidi(this.scale[0])
 
         return maxMelody
+    }
+
+    getMaxMelody(){
+        const maxMelody = this.population.reduce(function(prev, current) {
+            return (prev.fitnessScore > current.fitnessScore) ? prev : current
+        })
+        return maxMelody
+    }
+
+    getGraphData(){
+        return {
+            labels: this.iterationsArray,
+            data: this.maxMelodiesArray
+        }
     }
     
     generatePopulation(){
